@@ -95,7 +95,7 @@ const AppContent = () => {
         </TourGuideZone>
         <Ionicons name='ios-chatbubbles' {...iconProps} />
         <Ionicons name='ios-globe' {...iconProps} />
-        <TourGuideZone zone={5}>
+        <TourGuideZone zone={5} maskOffset={{right: 70}} text={'Add mask offset in any direction !'}>
           <Ionicons name='ios-navigate' {...iconProps} />
         </TourGuideZone>
         <TourGuideZone zone={6} shape={'circle'}>
