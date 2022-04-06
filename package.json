@@ -1,5 +1,5 @@
 {
-  "name": "@techenergic/rn-tourguide",
+  "name": "@tech_energic/rn-tourguide",
   "version": "1.0.0-beta1",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
   "main": "node_modules/expo/AppEntry.js",
@@ -84,5 +84,6 @@
     "logkitty": "^0.7.1",
     "mem": "^4.0.0",
     "set-value": "^4.0.1"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
