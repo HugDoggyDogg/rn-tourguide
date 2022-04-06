@@ -1,6 +1,6 @@
 {
-  "name": "rn-tourguide",
-  "version": "3.3.0-rc2",
+  "name": "@techenergic/rn-tourguide",
+  "version": "1.0.0-beta1",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xcarpentier/rn-tourguide.git"
+    "url": "git+https://github.com/HugDoggyDogg/rn-tourguide.git"
   },
   "keywords": [
     "react-native",
@@ -32,14 +32,16 @@
     "react",
     "copilot",
     "intro.js",
-    "intro"
+    "intro",
+    "tutorial",
+    "walkthrough"
   ],
   "author": "Xavier Carpentier <xcapetir@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/xcarpentier/rn-tourguide/issues"
   },
-  "homepage": "https://xcarpentier.github.io/rn-tourguide/",
+  "homepage": "https://github.com/HugDoggyDogg/rn-tourguide",
   "devDependencies": {
     "@types/hoist-non-react-statics": "3.3.1",
     "@types/jest": "25.2.3",
