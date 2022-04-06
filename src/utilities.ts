@@ -10,6 +10,7 @@ import {
   SVGMaskPathMorphParam,
   SvgPath,
   ValueXY,
+  Offset,
 } from './types'
 
 export const getFirstStep = (steps: Steps): IStep | null =>
@@ -122,23 +123,44 @@ export const circleSvgPath = ({
   ].join('')
 }
 
-const sizeOffset = memoize((size: ValueXY, maskOffset: number = 0) =>
-  maskOffset
-    ? {
-        x: size.x + maskOffset,
-        y: size.y + maskOffset,
-      }
-    : size,
-)
+const sanitizeOffsets = (maskOffset?: number | Offset): Offset => {
+  let offsets: Offset = {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  }
+  if (typeof maskOffset === 'number') {
+    offsets.top = maskOffset;
+    offsets.bottom = maskOffset;
+    offsets.left = maskOffset;
+    offsets.right = maskOffset;
+  } else if (maskOffset) {
+    offsets.top = maskOffset.top || 0;
+    offsets.bottom = maskOffset.bottom || 0;
+    offsets.left = maskOffset.left || 0;
+    offsets.right = maskOffset.right || 0;
+  }
 
-const positionOffset = memoize((position: ValueXY, maskOffset: number = 0) =>
-  maskOffset
-    ? {
-        x: position.x - maskOffset / 2,
-        y: position.y - maskOffset / 2,
-      }
-    : position,
-)
+  return offsets;
+}
+
+const sizeOffset = memoize((size: ValueXY, maskOffset?: number | Offset) => {
+  const offsets = sanitizeOffsets(maskOffset);
+
+  return {
+    x: size.x + offsets.left! + offsets.right!,
+    y: size.y + offsets.bottom! + offsets.top!,
+  }
+})
+
+const positionOffset = memoize((position: ValueXY, maskOffset?: number | Offset) => {
+  const offsets = sanitizeOffsets(maskOffset);
+  return {
+    x: position.x - offsets.left!,
+    y: position.y - offsets.top!,
+  };
+})
 
 const getMaxSegmentLength = memoize((shape: Shape) => {
   switch (shape) {
@@ -164,10 +186,12 @@ const getInterpolator = memoize(
     shape: Shape,
     position: ValueXY,
     size: ValueXY,
-    maskOffset: number = 0,
+    maskOffset: number | Offset = 0,
     borderRadius: number = 0,
     borderRadiusObject?: BorderRadiusObject,
   ) => {
+    size = sizeOffset(size, maskOffset);
+    position = positionOffset(position, maskOffset);
     const options = {
       maxSegmentLength: getMaxSegmentLength(shape),
     }
@@ -176,8 +200,8 @@ const getInterpolator = memoize(
       interpolate(
         previousPath,
         defaultSvgPath({
-          size: sizeOffset(size, maskOffset),
-          position: positionOffset(position, maskOffset),
+          size,
+          position,
           borderRadius,
           borderRadiusObject,
         }),
@@ -188,7 +212,7 @@ const getInterpolator = memoize(
         previousPath,
         position.x + size.x / 2,
         position.y + size.y / 2,
-        Math.max(size.x, size.y) / 2 + maskOffset,
+        Math.max(size.x, size.y) / 2,
         options,
       )
 
@@ -203,7 +227,7 @@ const getInterpolator = memoize(
           previousPath,
           [
             path,
-            circleSvgPath({ size: sizeOffset(size, maskOffset), position }),
+            circleSvgPath({ size, position }),
           ],
           optionsKeep,
         )
@@ -216,8 +240,8 @@ const getInterpolator = memoize(
           [
             path,
             defaultSvgPath({
-              size: sizeOffset(size, maskOffset),
-              position: positionOffset(position, maskOffset),
+              size,
+              position,
               borderRadius,
               borderRadiusObject,
             }),

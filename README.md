@@ -179,7 +179,7 @@ interface TourGuideZoneProps {
   isTourGuide?: boolean // return children without wrapping id false
   text?: string // text in tooltip
   shape?: Shape // which shape
-  maskOffset?: number // offset around zone
+  maskOffset?: number | Offset // offset around zone for each direction
   borderRadius?: number // round corner on mask when shape is rectangle (default)
   startAtMount?: boolean //  start at mount
   keepTooltipPosition?: boolean
@@ -197,7 +197,7 @@ export interface TourGuideProviderProps {
   backdropColor?: string
   verticalOffset?: number
   wrapperStyle?: StyleProp<ViewStyle>
-  maskOffset?: number
+  maskOffset?: number | Offset
   borderRadius?: number
   animationDuration?: number
   children: React.ReactNode
@@ -290,6 +290,17 @@ You can customize the mask color - default is `rgba(0, 0, 0, 0.4)`, by passing a
   // ...
 </TourGuideProvider>
 ```
+
+### Custom mask offset
+
+You can customize the mask offset by passing either an `Offset` type object or a number to the `TourGuideZone` component. Defaults to 0 = no offset.
+
+```tsx
+<TourGuideZone maskOffset={{left: 60}}>
+  // ...
+</TourGuideZone>
+```
+
 
 ### Custom labels (for i18n)
 
