@@ -180,7 +180,7 @@ interface TourGuideZoneProps {
   text?: string // text in tooltip
   shape?: Shape // which shape
   maskOffset?: number // offset around zone
-  borderRadius?: number // round corner when rectangle
+  borderRadius?: number // round corner on mask when shape is rectangle (default)
   startAtMount?: boolean //  start at mount
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
@@ -202,7 +202,7 @@ export interface TourGuideProviderProps {
   animationDuration?: number
   children: React.ReactNode
   dismissOnPress?: boolean
-  preventOutsideInteraction?:boolean
+  preventOutsideInteraction?: boolean // Prevent interaction with any UI other than tooltip while tour is open
 }
 
 interface TooltipProps {

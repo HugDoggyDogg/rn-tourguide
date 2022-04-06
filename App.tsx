@@ -21,7 +21,13 @@ const uri =
 // Add <TourGuideProvider/> at the root of you app!
 function App() {
   return (
-    <TourGuideProvider {...{ borderRadius: 16, androidStatusBarVisible: true }}>
+    <TourGuideProvider
+      preventOutsideInteraction
+      {...{
+        borderRadius: 16,
+        androidStatusBarVisible: true,
+      }}
+    >
       <AppContent />
     </TourGuideProvider>
   )
