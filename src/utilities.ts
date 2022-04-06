@@ -124,25 +124,25 @@ export const circleSvgPath = ({
 }
 
 const sanitizeOffsets = (maskOffset?: number | Offset): Offset => {
-  let offsets: Offset = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  }
+  let top = 0, bottom = 0, left = 0, right = 0;
   if (typeof maskOffset === 'number') {
-    offsets.top = maskOffset;
-    offsets.bottom = maskOffset;
-    offsets.left = maskOffset;
-    offsets.right = maskOffset;
+    top = maskOffset;
+    bottom = maskOffset;
+    left = maskOffset;
+    right = maskOffset;
   } else if (maskOffset) {
-    offsets.top = maskOffset.top || 0;
-    offsets.bottom = maskOffset.bottom || 0;
-    offsets.left = maskOffset.left || 0;
-    offsets.right = maskOffset.right || 0;
+    top = maskOffset.top || 0;
+    bottom = maskOffset.bottom || 0;
+    left = maskOffset.left || 0;
+    right = maskOffset.right || 0;
   }
 
-  return offsets;
+  return {
+    top,
+    bottom,
+    left,
+    right,
+  };
 }
 
 const sizeOffset = memoize((size: ValueXY, maskOffset?: number | Offset) => {
