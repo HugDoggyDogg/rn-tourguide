@@ -6,7 +6,6 @@ export interface Emitter {
   on(type: string, handler: Handler): void
   off(type: string, handler: Handler): void
   emit(type: string, event?: any): void
-  all: Map<string, Handler>,
 }
 
 export type Ctx<T extends any> = Record<string, T> & { _default: T }
