@@ -1,6 +1,6 @@
 {
   "name": "@tech_energic/rn-tourguide",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
@@ -15,6 +15,7 @@
     "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
     "lint": "tslint --project .",
     "verify": "yarn test && yarn lint && yarn tsc && yarn build",
+    "prepublishOnly": "yarn verify && yarn config:npm",
     "postpublish": "yarn config:dev",
     "cleaning": "rm -rf node_modules && rm -f yarn.lock && yarn cache clean && yarn install && watchman watch-del-all && rm -fr $TMPDIR/react-*",
     "deploy": "gh-pages -d web-build",
