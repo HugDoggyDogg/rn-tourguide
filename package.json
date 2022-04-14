@@ -1,22 +1,20 @@
 {
   "name": "@tech_energic/rn-tourguide",
-  "version": "1.0.0-beta1",
+  "version": "1.0.3",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
-  "private": false,
   "scripts": {
     "start": "yarn config:dev && expo start -c",
     "start:web": "yarn config:dev && expo start -c -w",
     "test": "TZ=Europe/Paris jest --no-watchman",
-    "tsc": "node_modules/.bin/tsc --noEmit",
-    "tsc:watch": "node_modules/.bin/tsc --noEmit --watch",
-    "build": "rm -rf lib/ && node_modules/.bin/tsc",
+    "tsc": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch",
+    "build": "rm -rf lib/ && tsc --extendedDiagnostics --listEmittedFiles",
     "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
     "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
     "lint": "tslint --project .",
     "verify": "yarn test && yarn lint && yarn tsc && yarn build",
-    "prepublishOnly": "yarn verify && yarn config:npm",
     "postpublish": "yarn config:dev",
     "cleaning": "rm -rf node_modules && rm -f yarn.lock && yarn cache clean && yarn install && watchman watch-del-all && rm -fr $TMPDIR/react-*",
     "deploy": "gh-pages -d web-build",
@@ -39,7 +37,7 @@
   "author": "Xavier Carpentier <xcapetir@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xcarpentier/rn-tourguide/issues"
+    "url": "https://github.com/HugDoggyDogg/rn-tourguide/issues"
   },
   "homepage": "https://github.com/HugDoggyDogg/rn-tourguide",
   "devDependencies": {
@@ -65,7 +63,7 @@
     "react-test-renderer": ">=16.8.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "~4.3.5"
+    "typescript": "^4.6.3"
   },
   "jest": {
     "preset": "jest-expo",
@@ -85,5 +83,8 @@
     "mem": "^4.0.0",
     "set-value": "^4.0.1"
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "files": [
+    "/lib"
+  ]
 }
