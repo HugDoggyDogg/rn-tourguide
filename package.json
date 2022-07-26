@@ -1,6 +1,6 @@
 {
   "name": "@tech_energic/rn-tourguide",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
   "main": "node_modules/expo/AppEntry.js",
   "types": "lib/index.d.ts",
@@ -8,9 +8,9 @@
     "start": "yarn config:dev && expo start -c",
     "start:web": "yarn config:dev && expo start -c -w",
     "test": "TZ=Europe/Paris jest --no-watchman",
-    "tsc": "tsc --noEmit",
-    "tsc:watch": "tsc --noEmit --watch",
-    "build": "rm -rf lib/ && tsc --extendedDiagnostics --listEmittedFiles",
+    "tsc": "node_modules/.bin/tsc --noEmit",
+    "tsc:watch": "node_modules/.bin/tsc --noEmit --watch",
+    "build": "rm -rf lib/ && node_modules/.bin/tsc",
     "config:dev": "json -I -f package.json -e 'this.main=\"node_modules/expo/AppEntry.js\"'",
     "config:npm": "json -I -f package.json -e 'this.main=\"lib/index.js\"'",
     "lint": "tslint --project .",
@@ -84,8 +84,5 @@
     "mem": "^4.0.0",
     "set-value": "^4.0.1"
   },
-  "packageManager": "yarn@3.2.0",
-  "files": [
-    "/lib"
-  ]
+  "packageManager": "yarn@3.2.0"
 }
